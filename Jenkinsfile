@@ -1,5 +1,5 @@
 pipeline {
-    agent any 
+    agent any
     tools {
       maven 'apache-maven-3.3.1'
     }
@@ -7,7 +7,7 @@ pipeline {
         stage('Build and Test') {
             agent { node{
                        label "jenkins"}
-            } 
+            }
             steps {
                 sh 'mvn clean package'
                 sh 'echo "build ran"'
@@ -15,7 +15,7 @@ pipeline {
                 junit '**/target/surefire-reports/*.xml'
             }
         }
-        
+
         stage ('Sonar Analysis') {
             agent {node{
                    label "jenkins"}
@@ -23,9 +23,9 @@ pipeline {
             steps {
                 sh 'echo "running sonar analysis"'
                 sh "mvn sonar:sonar -Dsonar.host.url=http://sonarqube:9000 -Dsonar.branch=${env.BRANCH_NAME}"
-            }   
+            }
         }
-        
+
         stage ('Deploy to Integration') {
             agent {node{
                    label "jenkins"}
