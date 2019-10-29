@@ -2,7 +2,6 @@ pipeline {
     agent any
     tools {
       maven 'apache-maven'
-      args '-u root'
     }
     stages {
         stage('Build and Test') {
@@ -10,7 +9,7 @@ pipeline {
                        label "jenkins"}
             }
             steps {
-                sh 'mvn clean package'
+                sh '-u root mvn clean package'
                 sh 'echo "build ran"'
                 archiveArtifacts artifacts: 'gameoflife-web/target/gameoflife.war', fingerprint:true
                 junit '**/target/surefire-reports/*.xml'
