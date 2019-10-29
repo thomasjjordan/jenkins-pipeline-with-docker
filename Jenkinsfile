@@ -2,6 +2,7 @@ pipeline {
     agent any
     tools {
       maven 'apache-maven'
+      args '-u root'
     }
     stages {
         stage('Build and Test') {
