@@ -9,8 +9,8 @@ pipeline {
                        label "jenkins"}
             }
             steps {
-                sh 'mvn -e clean package'
-                sh 'echo "build ran"'
+                // sh 'mvn clean package'
+                // sh 'echo "build ran"'
                 archiveArtifacts artifacts: 'gameoflife-web/target/gameoflife.war', fingerprint:true
                 junit '**/target/surefire-reports/*.xml'
             }

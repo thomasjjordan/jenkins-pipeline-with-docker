@@ -1,9 +1,16 @@
+
 version: '2'
 services:
   jenkins:
-    image: "bitnami/jenkins:2"
+    image: 'bitnami/jenkins:2'
     ports:
-     - "8080:8080"
+      - '80:8080'
+      - '443:8443'
+      - '50000:50000'
+    environment:
+      - DISABLE_JENKINS_INITIALIZATION=yes
+    volumes:
+      - 'jenkins_data:/bitnami'
     networks:
       - demo
   sonarqube:
@@ -20,5 +27,8 @@ services:
       - TOMCAT_PASS=admin
     networks:
       - demo
+volumes:
+  jenkins_data:
+    driver: local
 networks:
   demo:
